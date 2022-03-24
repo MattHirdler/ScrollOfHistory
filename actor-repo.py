@@ -12,6 +12,7 @@ class StoreTest(unittest.TestCase):
         """test that __exit__ is available for context managers"""
         self.assertEqual(StoreTest.repo.__exit__(None, None, None), StoreTest.repo)
     def test_complete(self):
+        """test that complete can be used to control transaction status"""
         self.assertEqual(StoreTest.repo._complete, False)
         self.assertEqual(StoreTest.repo.complete(), StoreTest.repo)
         self.assertEqual(StoreTest.repo._complete, True)
