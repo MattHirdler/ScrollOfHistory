@@ -8,7 +8,7 @@ class StoreTest(unittest.TestCase):
     def test_enter(self):
         self.assertEquals(StoreTest.repo.__enter__(), StoreTest.repo)
     def test_exit(self):
-        pass
+        self.assertEqual(StoreTest.repo.__exit__(None, None, None), StoreTest.repo)
     def test_complete(self):
         pass
     def test_close(self):
@@ -17,6 +17,9 @@ class StoreTest(unittest.TestCase):
 class Store():
     def __init__(self):
         self.storage = []
+
+    def __enter__(self):
+        return self
 # Create
 
 # Read
