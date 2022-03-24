@@ -10,7 +10,9 @@ class StoreTest(unittest.TestCase):
     def test_exit(self):
         self.assertEqual(StoreTest.repo.__exit__(None, None, None), StoreTest.repo)
     def test_complete(self):
-        pass
+        self.assertEqual(StoreTest.repo._complete == False)
+        self.assertEqual(StoreTest.repo.complete(), StoreTest.repo)
+        self.assertEqual(StoreTest.repo._complete == True)
     def test_close(self):
         pass
 
