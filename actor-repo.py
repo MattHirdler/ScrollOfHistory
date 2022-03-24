@@ -9,6 +9,7 @@ class StoreTest(unittest.TestCase):
         """test that __enter__ is available for context managers"""
         self.assertEqual(StoreTest.repo.__enter__(), StoreTest.repo)
     def test_exit(self):
+        """test that __exit__ is available for context managers"""
         self.assertEqual(StoreTest.repo.__exit__(None, None, None), StoreTest.repo)
     def test_complete(self):
         self.assertEqual(StoreTest.repo._complete, False)
