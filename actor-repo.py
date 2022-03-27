@@ -21,12 +21,9 @@ class StoreTest(unittest.TestCase):
 
 class ActorStoreTest(unittest.TestCase):
     """The persistence manager for actors."""
-    @classmethod
-    def setUpClass(cls):
-        cls.repo = ActorStore()
-
     def test_addActor(self):
         """Actors can be added to their repository"""
+        repo = ActorStore()
         name = 'George Washington'
         year_of_birth = 1940
         year_of_death = 1976
@@ -35,6 +32,7 @@ class ActorStoreTest(unittest.TestCase):
 
     def test_next(self):
         """Get the next actor in the repository sorted by year_of_birth descand loops back to the top when the list is exhausted"""
+        repo = ActorStore()
         name1 = 'George Washington'
         name2 = name1.join('2')
         year_of_birth1 = 1940
@@ -43,11 +41,11 @@ class ActorStoreTest(unittest.TestCase):
         year_of_birth2 = year_of_birth1+1
         year_of_death2 = year_of_birth2
         years_active2 = range(year_of_birth2, year_of_death2)
-        ActorStoreTest.repo.addActor(name1, years_active1)
-        ActorStoreTest.repo.addActor(name2, years_active2)
-        self.assertEqual(ActorStoreTest.repo.next(), name1, years_active1)
-        self.assertEqual(ActorStoreTest.repo.next(), name2, years_active2)
-        self.assertEqual(ActorStoreTest.repo.next(), name1, years_active1)
+        repo.addActor(name1, years_active1)
+        repo.addActor(name2, years_active2)
+        self.assertEqual(repo.next(), name1, years_active1)
+        self.assertEqual(repo.next(), name2, years_active2)
+        self.assertEqual(repo.next(), name1, years_active1)
         
 class Store():
     """The base type of all repositories. Intended to provide a seperation between reading data-models and handling persistence. Transactions are marked as complete by calling 'complete'"""
