@@ -48,6 +48,13 @@ class Store():
     def complete(self):
         self._complete = True
         return self
+
+class ActorStore():
+    """The Actor specialized repository"""
+    def addActor(self, name, yearsActive):
+       """Add an actor to the repository"""
+       return name, yearsActive
+       
 # Read
 
 # Update
