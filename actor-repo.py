@@ -28,24 +28,24 @@ class ActorStoreTest(unittest.TestCase):
         year_of_birth = 1940
         year_of_death = 1976
         yearsActive = range(year_of_birth, year_of_death)
-        self.assertEqual(ActorStoreTest.repo.addActor(name, yearsActive), (name, yearsActive))
+        self.assertEqual(repo.addActor(name, yearsActive), (name, yearsActive))
 
     def test_next(self):
         """Get the next actor in the repository sorted by year_of_birth descand loops back to the top when the list is exhausted"""
         repo = ActorStore()
         name1 = 'George Washington'
-        name2 = name1.join('2')
+        name2 = 'George Washington'
         year_of_birth1 = 1940
-        year_of_death1 = year_of_birth1
+        year_of_death1 = year_of_birth1+1
         years_active1 = range(year_of_birth1, year_of_death1)
-        year_of_birth2 = year_of_birth1+1
-        year_of_death2 = year_of_birth2
+        year_of_birth2 = year_of_birth1-10
+        year_of_death2 = year_of_birth2+1
         years_active2 = range(year_of_birth2, year_of_death2)
-        repo.addActor(name1, years_active1)
         repo.addActor(name2, years_active2)
-        self.assertEqual(repo.next(), name1, years_active1)
-        self.assertEqual(repo.next(), name2, years_active2)
-        self.assertEqual(repo.next(), name1, years_active1)
+        repo.addActor(name1, years_active1)
+        self.assertEqual(repo.next(), (name1, years_active1))
+        self.assertEqual(repo.next(), (name2, years_active2))
+        self.assertEqual(repo.next(), (name1, years_active1))
         
 class Store():
     """The base type of all repositories. Intended to provide a seperation between reading data-models and handling persistence. Transactions are marked as complete by calling 'complete'"""
@@ -70,14 +70,16 @@ class ActorStore():
 
     def addActor(self, name, yearsActive):
        """Add an actor to the repository"""
+       assert len(yearsActive)
        self._repo.append((name, yearsActive))
+       self._repo.sort(key=lambda a: min(a[1]), reverse=True)
        return name, yearsActive
 
     def next(self):
         """get the next actor in the timeline"""
         self._last += 1
+        self._last %= len(self._repo)
         return self._repo[self._last]
-       
 # Read
 
 # Update
