@@ -35,12 +35,8 @@ class ActorStoreTest(unittest.TestCase):
         repo = ActorStore()
         name1 = 'George Washington'
         name2 = 'George Washington'
-        year_of_birth1 = 1940
-        year_of_death1 = year_of_birth1+1
-        years_active1 = range(year_of_birth1, year_of_death1)
-        year_of_birth2 = year_of_birth1-10
-        year_of_death2 = year_of_birth2+1
-        years_active2 = range(year_of_birth2, year_of_death2)
+        years_active1 = range(1940, 1941)
+        years_active2 = range(1930, 1931)
         repo.addActor(name2, years_active2)
         repo.addActor(name1, years_active1)
         self.assertEqual(repo.next(), (name1, years_active1))
