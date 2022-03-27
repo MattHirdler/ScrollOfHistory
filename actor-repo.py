@@ -33,10 +33,12 @@ class ActorStoreTest(unittest.TestCase):
     def test_next(self):
         """Get the next actor in the repository sorted by year_of_birth descand loops back to the top when the list is exhausted"""
         repo = ActorStore()
+        name1 = 'George'
+        name2 = 'George'
         years_active1 = range(1940, 1941)
         years_active2 = range(1930, 1931)
-        repo.addActor('George', years_active2)
-        repo.addActor('George', years_active1)
+        repo.addActor(name2, years_active2)
+        repo.addActor(name1, years_active1)
         self.assertEqual(repo.next(), (name1, years_active1))
         self.assertEqual(repo.next(), (name2, years_active2))
         self.assertEqual(repo.next(), (name1, years_active1))
