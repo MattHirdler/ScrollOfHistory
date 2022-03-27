@@ -76,8 +76,3 @@ class ActorStore():
         self._last += 1
         self._last %= len(self._repo)
         return self._repo[self._last]
-# Read
-
-# Update
-
-# Delete
