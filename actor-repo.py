@@ -19,7 +19,23 @@ class StoreTest(unittest.TestCase):
     def test_close(self):
         pass
 
+class ActorStoreTest(unittest.TestCase):
+    """The persistence manager for actors."""
+    @classmethod
+    def setUpClass(cls):
+        cls.repo = ActorStore()
+
+    def test_addActor(self):
+        """Actors can be added to their repository"""
+        name = 'George Washington'
+        year_of_birth = 1940
+        year_of_death = 1976
+        yearsActive = range(year_of_birth, year_of_death)
+        self.assertEqual(ActorStoreTest.repo.addActor(name, yearsActive), (name, yearsActive))
+
+        
 class Store():
+    """The base type of all repositories. Intended to provide a seperation between reading data-models and handling persistence. Transactions are marked as complete by calling 'complete'"""
     def __init__(self):
         self._complete = False
 
@@ -32,8 +48,6 @@ class Store():
     def complete(self):
         self._complete = True
         return self
-# Create
-
 # Read
 
 # Update
