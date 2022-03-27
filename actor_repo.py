@@ -39,9 +39,9 @@ class ActorStoreTest(unittest.TestCase):
         years_active2 = range(1930, 1931)
         repo.addActor(name2, years_active2)
         repo.addActor(name1, years_active1)
-        self.assertEqual(repo.next(), (name1, years_active1))
         self.assertEqual(repo.next(), (name2, years_active2))
         self.assertEqual(repo.next(), (name1, years_active1))
+        self.assertEqual(repo.next(), (name2, years_active2))
         
 class Store():
     """The base type of all repositories. Intended to provide a seperation between reading data-models and handling persistence. Transactions are marked as complete by calling 'complete'"""
