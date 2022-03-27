@@ -66,7 +66,7 @@ class ActorStore():
 
     def addActor(self, name, yearsActive):
        """Add an actor to the repository"""
-       assert len(yearsActive)
+       assert len(yearsActive) > 0, "actors must be born before they die"
        self._repo.append((name, yearsActive))
        self._repo.sort(key=lambda a: min(a[1]), reverse=True)
        return name, yearsActive
