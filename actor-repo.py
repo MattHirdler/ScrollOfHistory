@@ -64,9 +64,19 @@ class Store():
 
 class ActorStore():
     """The Actor specialized repository"""
+    def __init__(self):
+        self._repo = []
+        self._last = -1
+
     def addActor(self, name, yearsActive):
        """Add an actor to the repository"""
+       self._repo.append((name, yearsActive))
        return name, yearsActive
+
+    def next(self):
+        """get the next actor in the timeline"""
+        self._last += 1
+        return self._repo[self._last]
        
 # Read
 
